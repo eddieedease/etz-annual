@@ -15,29 +15,64 @@ interface Section {
   standalone: true,
   imports: [CommonModule],
 })
+
 export class AppComponent {
   isSidebarOpen = true;
   activeSection = 'introduction';
-  
   sections: Section[] = [
     {
-      id: 'introduction',
-      title: 'Introduction',
+      id: 'Algemeen',
+      title: 'Algemeen',
       template: null // You'll replace these with actual content
     },
     {
-      id: 'highlights',
-      title: 'Key Highlights',
+      id: 'Inzicht medewerkers',
+      title: 'Inzicht medewerkers',
       template: null
     },
     {
-      id: 'financials',
-      title: 'Financial Overview',
+      id: 'Verlof en generatieafspraken',
+      title: 'Verlof en generatieafspraken',
       template: null
     },
     {
-      id: 'outlook',
-      title: 'Future Outlook',
+      id: 'Personeelsbeleid',
+      title: 'Personeelsbeleid',
+      template: null
+    },
+    {
+      id: 'Verzuim',
+      title: 'Verzuim',
+      template: null
+    },
+    {
+      id: 'Arbeid en gezondheid',
+      title: 'Arbeid en gezondheid',
+      template: null
+    },
+    {
+      id: 'Preventieve verrichtingen',
+      title: 'Preventieve verrichtingen',
+      template: null
+    },
+    {
+      id: 'Bedrijfsmaatschappelijk werk',
+      title: 'Bedrijfsmaatschappelijk werk',
+      template: null
+    },
+    {
+      id: 'Commissies en Veiligheid',
+      title: 'Commissies en Veiligheid',
+      template: null
+    },
+    {
+      id: 'Arbeidsvoorwaarden',
+      title: 'Arbeidsvoorwaarden',
+      template: null
+    },
+    {
+      id: 'CAO',
+      title: 'CAO',
       template: null
     }
   ];
