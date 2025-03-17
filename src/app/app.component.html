@@ -1,9 +1,7 @@
 <div class="flex h-screen bg-gray-100">
   <!-- Sidebar -->
   <div [ngClass]="{'w-64': isSidebarOpen, 'w-0': !isSidebarOpen}" 
-     class="relative transition-all duration-300">
-  <div [ngClass]="{'w-64': isSidebarOpen, 'w-0': !isSidebarOpen}" 
-       class="fixed h-full bg-white shadow-lg overflow-hidden transition-all duration-300">
+       class="fixed h-full bg-white shadow-lg overflow-hidden transition-all duration-300 z-20">
     <div class="p-6">
       <br><br><br>
       <h1 class="text-xl font-bold mb-6">Sociaal Jaarverslag</h1>
@@ -19,18 +17,21 @@
       </nav>
     </div>
   </div>
-</div>
 
   <!-- Main Content -->
   <div class="flex-1 overflow-auto" (scroll)="onScroll()">
     <!-- Toggle Sidebar Button -->
-    <button (click)="toggleSidebar()"
-            class="fixed top-4 left-4 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100">
-      <i class="text-xl">{{ isSidebarOpen ? '←' : '→' }}</i>
+  <!-- Main Content -->
+  <div class="flex-1 overflow-auto" (scroll)="onScroll()">
+    <!-- Toggle Sidebar Button -->
+    <button style="z-index: 99" (click)="toggleSidebar()"
+            class="fixed top-4 left-4 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-100">Inhoud
+      <i class="text-xl"> {{ isSidebarOpen ? '←' : '→' }}</i>
     </button>
 
     <!-- Content Area -->
     <div class="max-w-4xl mx-auto p-8">
+      <h1 class="text-3xl font-bold mb-6">ETZ Sociaal Jaarverslag 2024</h1>
       <header class="w-full bg-white shadow-sm py-3 px-4 md:px-6 sticky top-0 z-10">
         <div class="flex justify-end items-center">
           <!-- Logo container - adjust the width as needed for your actual logo -->
@@ -44,7 +45,7 @@
           </div>
         </div>
       </header>
-      <h1 class="text-xl font-bold mb-6">ETZ Sociaal Jaarverslag 2024</h1>
+      
       <section *ngFor="let section of sections" 
                [id]="section.id" 
                class="min-h-screen py-16">
@@ -297,7 +298,7 @@
             <div class="mb-8">
               <h3 class="text-xl font-semibold mb-3" id="instroom-uitstroom">2.3 Instroom en uitstroom<sup>1</sup></h3>
               <p class="text-gray-700 mb-4">
-                Vanaf dit jaar worden de in-en uitstroomcijfers getoond op basis van onderstaande indeling. Hiervoor is gekozen omdat de vorige indeling onvoldoende aansluit bij de ontwikkeling die we zien. We zien nl. in meerdere data terugkomen dat gemiddeld genomen 40% van medewerkers binnen 2 jaar uitstroomt. Om hier zicht en grip op te krijgen is in 2023 de exit enquête gewijzigd, waarover in het volgend onderdeel meer, en zijn we in december 24 gestart met het project Onboarding. Een van de pijlers is om medewerkers een warm welkom te bieden. Dit doen we op verschillende manieren waaronder het inzetten van een buddy en ETZ vriend. Ook worden nieuwe medewerkers via diverse kanalen (ETZ fit app / HR Portaal) geïnformeerd over Onboarding en wat dit voor hun kan betekenen. De rol van de leidinggevende is in deze zeer belangrijk en ook zij zijn meegenomen in dit proces.
+                Vanaf dit jaar worden de in-en uitstroomcijfers getoond op basis van onderstaande indeling. Hiervoor is gekozen omdat de vorige indeling onvoldoende aansluit bij de ontwikkeling die we zien. We zien nl. in meerdere data terugkomen dat gemiddeld genomen 40% van medewerkers binnen 2 jaar uitstroomt. Om hier zicht en grip op te krijgen is in 2023 de exit enquête gewijzigd, waarover in het volgend onderdeel meer, en zijn we in december 24 gestart met het project Onboarding.<br><br> Een van de pijlers is om medewerkers een warm welkom te bieden. Dit doen we op verschillende manieren waaronder het inzetten van een buddy en ETZ vriend. Ook worden nieuwe medewerkers via diverse kanalen (ETZ fit app / HR Portaal) geïnformeerd over Onboarding en wat dit voor hun kan betekenen. De rol van de leidinggevende is in deze zeer belangrijk en ook zij zijn meegenomen in dit proces.
               </p>
               <p class="text-gray-700 mb-5">
                 Tot slot vragen we medewerkers naar hun ervaring op dit vlak. Deze data is gezien het moment waarmee we hier zijn gestart nog ontoereikend om daar een rode draad uit te halen, maar zal volgend jaar zeker terugkomen.
@@ -873,7 +874,7 @@
               </div>
               
               <p class="text-gray-700 mb-4">
-                Want in 2023 werden de Jaargesprekken vernieuwd. Vanuit de visie van Hart en Lef, Modern Werkgeverschap en ETZ Fit is gesteld dat het hoge prioriteit heeft dat de leidinggevende het Goede Gesprek voert met de medewerker. Het begrijpen, luisteren, weten wat de medewerker belangrijk vindt en daarover de continue dialoog voeren draagt bij aan werkplezier, behoud, duurzame inzetbaarheid en ontwikkeling van de medewerker. Dit in de context van krapte op de arbeidsmarkt en de noodzaak om opgedane kennis en vaardigheden te willen behouden voor de organisatie en de zorg. Er is een visie op het Goede Gesprek in het ETZ gemaakt. Tevens hebben we het oorspronkelijk Jaargesprek een andere naam gegeven: ETZ Fit Dialoog, waarvan we 1 moment in het jaar de tijd nemen om gedegen terug- en vooruit te kijken. En verder ook op andere momenten in het jaar de gemaakte afspraken en eventuele andere onderwerpen met elkaar bespreken. Daarbij vormen de thema's van ETZ FIT (Mentaal en Fysiek Fit, Fit met de functie en Fit met de Organisatie/Team) de basis. Tevens willen we zoveel mogelijk aansluiten op de diverse behoeften van medewerkers. En hebben we de ETZ Fit Dialoog in 3 vormen ontwikkeld met een groep leidinggevenden en medewerkers uit het ETZ. Namelijk: het Grip op Fit spel, de Werk als Waarde dialoog en de Fitmeter.
+                Want in 2023 werden de Jaargesprekken vernieuwd. Vanuit de visie van Hart en Lef, Modern Werkgeverschap en ETZ Fit is gesteld dat het hoge prioriteit heeft dat de leidinggevende het Goede Gesprek voert met de medewerker. Het begrijpen, luisteren, weten wat de medewerker belangrijk vindt en daarover de continue dialoog voeren draagt bij aan werkplezier, behoud, duurzame inzetbaarheid en ontwikkeling van de medewerker. Dit in de context van krapte op de arbeidsmarkt en de noodzaak om opgedane kennis en vaardigheden te willen behouden voor de organisatie en de zorg.<br><br> Er is een visie op het Goede Gesprek in het ETZ gemaakt. Tevens hebben we het oorspronkelijk Jaargesprek een andere naam gegeven: ETZ Fit Dialoog, waarvan we 1 moment in het jaar de tijd nemen om gedegen terug- en vooruit te kijken. En verder ook op andere momenten in het jaar de gemaakte afspraken en eventuele andere onderwerpen met elkaar bespreken. Daarbij vormen de thema's van ETZ FIT (Mentaal en Fysiek Fit, Fit met de functie en Fit met de Organisatie/Team) de basis. Tevens willen we zoveel mogelijk aansluiten op de diverse behoeften van medewerkers. En hebben we de ETZ Fit Dialoog in 3 vormen ontwikkeld met een groep leidinggevenden en medewerkers uit het ETZ. Namelijk: het Grip op Fit spel, de Werk als Waarde dialoog en de Fitmeter.
               </p>
               
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -1401,17 +1402,17 @@
                 
                 <!-- Tegel 2: Risico Inventarisatie & Evaluatie (RI&E) -->
                 <div class="mb-8">
-                  <h3 class="text-xl font-semibold mb-3" id="risico-inventarisatie">Risico Inventarisatie & Evaluatie (RI&E)</h3>
+                  <h3 class="text-xl font-semibold mb-3" id="risico-inventarisatie">6.1 Risico Inventarisatie & Evaluatie (RI&E)</h3>
                   
                   <div class="bg-white rounded-lg shadow p-6 mb-6">
-                    <h4 class="text-lg font-medium mb-3">2.1 Inleiding</h4>
+                    <h4 class="text-lg font-medium mb-3">Inleiding</h4>
                     <p class="text-gray-700 mb-4">
                       Een Risico Inventarisatie en -Evaluatie brengt de arbeidsrisico's voor medewerkers in kaart. En geeft handvaten om deze risico's te beheersen en te voorkomen, middels het inzetten van de juiste maatregelen. Deze maatregelen staan in een plan van aanpak. Elke afdeling heeft een dergelijk plan van aanpak. Ten aanzien van het RI&E instrument zijn er 2 belangrijke ontwikkelingen te benoemen. Specifiek met betrekking tot de Zorg RI&E en de nieuw te ontwikkelen dynamische RI&E.
                     </p>
                   </div>
                   
                   <div class="bg-white rounded-lg shadow p-6 mb-6">
-                    <h4 class="text-lg font-medium mb-3">2.2 Resultaat</h4>
+                    <h4 class="text-lg font-medium mb-3">Resultaat</h4>
                     
                     <h5 class="font-medium text-blue-700 mb-2">ZorgRI&E:</h5>
                     <p class="text-gray-700 mb-4">
@@ -1425,7 +1426,7 @@
                   </div>
                   
                   <div class="bg-white rounded-lg shadow p-6">
-                    <h4 class="text-lg font-medium mb-3">2.3 Acties</h4>
+                    <h4 class="text-lg font-medium mb-3">Acties</h4>
                     <ul class="list-disc pl-6 space-y-2 text-gray-700">
                       <li>
                         In 2024 heeft er monitoring van de plan van aanpak punten ZorgRI&E plaatsgevonden. Middels aanschrijven van de afdelingen wordt het oplossen van de risico's gestimuleerd. Dit in samenwerking met de Adviseurs Arbeid en Gezondheid.
@@ -1444,17 +1445,17 @@
                 
                 <!-- Tegel 3: Medewerker Onderzoek 2024 (MO 2024) -->
                 <div class="mb-8">
-                  <h3 class="text-xl font-semibold mb-3" id="medewerker-onderzoek">Medewerker Onderzoek 2024 (MO 2024)</h3>
+                  <h3 class="text-xl font-semibold mb-3" id="medewerker-onderzoek">6.2 Medewerker Onderzoek 2024 (MO 2024)</h3>
                   
                   <div class="bg-white rounded-lg shadow p-6 mb-6">
-                    <h4 class="text-lg font-medium mb-3">3.1 Inleiding</h4>
+                    <h4 class="text-lg font-medium mb-3">Inleiding</h4>
                     <p class="text-gray-700 mb-4">
                       Eind 2024 heeft het Medewerker onderzoek (MO) plaatsgevonden. Om de twee jaar inventariseert het ETZ de beleving van medewerkers ten aanzien van diverse werkthema's. Dit met als doel om een vinger aan de pols te houden te houden en ze bespreekbaar te blijven houden. Door middel van interventies worden knelpunten op ziekenhuisniveau of eenheidsniveau opgepakt.
                     </p>
                   </div>
                   
                   <div class="bg-white rounded-lg shadow p-6 mb-6">
-                    <h4 class="text-lg font-medium mb-3">3.2 Resultaat</h4>
+                    <h4 class="text-lg font-medium mb-3">Resultaat</h4>
                     
                     <div class="flex flex-col md:flex-row mb-6">
                       <div class="w-full md:w-1/3 p-4 flex items-center justify-center">
@@ -1501,7 +1502,7 @@
                   </div>
                   
                   <div class="bg-white rounded-lg shadow p-6">
-                    <h4 class="text-lg font-medium mb-3">3.3 Acties</h4>
+                    <h4 class="text-lg font-medium mb-3">Acties</h4>
                     <p class="text-gray-700">
                       De resultaten van het MO zijn in Q4 gepresenteerd aan verschillende (doel)groepen: RvB, Zorgmanager, (organisatorisch) hoofden en teamleiders. Tevens zijn er verschillende digitale webinars georganiseerd om teamleidinggevenden te ondersteunen bij het lezen van de rapportages en de doorvertaling naar acties voor de eigen eenheden. Verdere acties zullen pas in 2025 uitgezet worden.
                     </p>
@@ -1510,10 +1511,10 @@
                 
                 <!-- Tegel 4: Medewerker Incidenten Meldingen (MIM) -->
                 <div class="mb-8">
-                  <h3 class="text-xl font-semibold mb-3" id="medewerker-incidenten">Medewerker Incidenten Meldingen (MIM)</h3>
+                  <h3 class="text-xl font-semibold mb-3" id="medewerker-incidenten">6.3 Medewerker Incidenten Meldingen (MIM)</h3>
                   
                   <div class="bg-white rounded-lg shadow p-6 mb-6">
-                    <h4 class="text-lg font-medium mb-3">4.1 Inleiding</h4>
+                    <h4 class="text-lg font-medium mb-3">Inleiding</h4>
                     <p class="text-gray-700 mb-4">
                       Het meldingssysteem biedt de mogelijkheid aan medewerkers om risico's ten aan zien van het werk te melden zodat de werkomstandigheden en omgeving telkens verbeterd.
                     </p>
@@ -1523,7 +1524,7 @@
                   </div>
                   
                   <div class="bg-white rounded-lg shadow p-6 mb-6">
-                    <h4 class="text-lg font-medium mb-3">4.2 Resultaat</h4>
+                    <h4 class="text-lg font-medium mb-3">Resultaat</h4>
                     <p class="text-gray-700 mb-4">
                       In 2024 zijn er in totaliteit 943 meldingen gedaan. Het meldingsgedrag wordt gestimuleerd binnen de afdelingen en teams (op verschillende wijze via communicatievormen, zoals VIP lunch, op verzoek van de afdeling een presentatie). Hieronder een overzicht.
                     </p>
@@ -1673,7 +1674,7 @@
                     </div>
                   
                     <div class="mb-6">
-                      <h5 class="font-medium mb-3">4.2.2 Top 3 MIM</h5>
+                      <h5 class="font-medium mb-3">Top 3 MIM</h5>
                       
                       <h6 class="font-medium text-blue-700 mb-2">Agressie, bejegening en ander ongewenst gedrag</h6>
                       <p class="text-gray-700 mb-3">
@@ -1919,7 +1920,7 @@
                   </div>
                   
                   <div class="bg-white rounded-lg shadow p-6">
-                    <h4 class="text-lg font-medium mb-3">4.3 Acties</h4>
+                    <h4 class="text-lg font-medium mb-3">Acties</h4>
                     <ul class="list-disc pl-6 space-y-4 text-gray-700">
                       <li>
                         Medio 2024 is de werkgroep Medewerkersveiligheid opgestart. De directe aanleiding hiervan is de stijging van het aantal agressie meldingen. De deelnemers van de werkgroep betreft een afspiegeling van medewerkers, leidinggevenden en andere disciplines vanuit het ziekenhuis. In de werkgroep worden de trends en analyses gedaan van alle MIM meldingen. Naar aanleiding van deze analyses worden interventies uitgezet. Er zijn op dit moment acties uitgezet ten aanzien van agressie, bejegening en ander ongewenst gedrag en prik-, snij- en spataccidenten. Enkele voorbeelden zijn:

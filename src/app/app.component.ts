@@ -1,5 +1,5 @@
 // app.component.ts
-import { Component, HostListener, NgZone } from '@angular/core';
+import { Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Section {
@@ -17,11 +17,14 @@ interface Section {
   imports: [CommonModule],
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   isSidebarOpen = true;
   activeSection = 'Algemeen'; // Set default to the first section ID
   private scrollTimeout: any = null;
   private manuallySelectedSection: string | null = null;
+  isMobile = false;
+  private lastActiveChange = 0;
+  private debounceTime = 1000; // 1 second delay
   
   sections: Section[] = [
     {
@@ -88,6 +91,24 @@ export class AppComponent {
 
   constructor(private ngZone: NgZone) {}
 
+  ngOnInit() {
+    // Check if mobile on init
+    this.checkIfMobile();
+    
+    // Listen for window resize events
+    window.addEventListener('resize', () => {
+      this.checkIfMobile();
+    });
+  }
+
+  private checkIfMobile() {
+    this.isMobile = window.innerWidth < 768; // 768px is typical mobile breakpoint
+    // Auto-hide sidebar on mobile
+    if (this.isMobile) {
+      this.isSidebarOpen = false;
+    }
+  }
+
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
@@ -102,50 +123,107 @@ export class AppComponent {
     // Update the active section and track it
     this.activeSection = sectionId;
     this.manuallySelectedSection = sectionId;
+    this.lastActiveChange = Date.now(); // Reset the timestamp for manual selection
     
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      let lastScrollTop = window.pageYOffset;
+      let scrollCount = 0;
       
-      // Reset the manually selected section after scrolling is complete
-      this.ngZone.runOutsideAngular(() => {
-        this.scrollTimeout = setTimeout(() => {
-          this.ngZone.run(() => {
-            this.manuallySelectedSection = null;
-          });
-        }, 1000); // Adjust timing as needed for your page scroll speed
-      });
+      // Start the smooth scroll
+      element.scrollIntoView({ behavior: 'smooth' });
+
+      // Create a function to detect when scrolling has actually stopped
+      const checkScrollStopped = () => {
+        const currentScrollTop = window.pageYOffset;
+        
+        if (currentScrollTop === lastScrollTop) {
+          scrollCount++;
+          // If we've detected no movement for several frames, consider scrolling complete
+          if (scrollCount > 5) {
+            this.ngZone.run(() => {
+              // Add a small delay before re-enabling section detection
+              setTimeout(() => {
+                this.manuallySelectedSection = null;
+                this.detectActiveSection(); // Force an immediate check
+              }, 100);
+            });
+            return;
+          }
+        } else {
+          scrollCount = 0;
+          lastScrollTop = currentScrollTop;
+        }
+        
+        requestAnimationFrame(checkScrollStopped);
+      };
+
+      // Start checking for scroll completion
+      requestAnimationFrame(checkScrollStopped);
+    }
+
+    // Close sidebar on mobile after selection
+    if (this.isMobile) {
+      this.isSidebarOpen = false;
     }
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-    // If a section was manually selected and is still in the grace period, don't change selection
+    // If a section was manually selected, don't interfere with the scroll
     if (this.manuallySelectedSection !== null) {
       return;
     }
     
+    // Use requestAnimationFrame for better performance
+    if (!this.scrollTimeout) {
+      this.scrollTimeout = requestAnimationFrame(() => {
+        this.detectActiveSection();
+        this.scrollTimeout = null;
+      });
+    }
+  }
+
+  private detectActiveSection() {
+    // Skip detection if manually selected
+    if (this.manuallySelectedSection !== null) {
+      return;
+    }
+
     const sections = this.sections.map(section => ({
       id: section.id,
       element: document.getElementById(section.id)
     }));
 
-    const scrollPosition = window.scrollY + window.innerHeight / 3;
+    // Get viewport height
+    const viewportHeight = window.innerHeight;
     
-    // Find the current visible section
+    // Find the section that takes up most of the viewport
+    let maxVisibleSection = null;
+    let maxVisibleHeight = 0;
+
     for (const section of sections) {
       if (section.element) {
-        const { offsetTop, offsetHeight } = section.element;
-        if (
-          scrollPosition >= offsetTop &&
-          scrollPosition < offsetTop + offsetHeight
-        ) {
-          if (this.activeSection !== section.id) {
-            this.activeSection = section.id;
-          }
-          break;
+        const rect = section.element.getBoundingClientRect();
+        const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+        
+        if (visibleHeight > maxVisibleHeight) {
+          maxVisibleHeight = visibleHeight;
+          maxVisibleSection = section;
         }
       }
+    }
+
+    const now = Date.now();
+    // Only apply debounce for scroll-based detection
+    if (maxVisibleSection && 
+        this.activeSection !== maxVisibleSection.id && 
+        this.manuallySelectedSection === null && 
+        (now - this.lastActiveChange) > this.debounceTime) {
+      this.ngZone.run(() => {
+        this.activeSection = maxVisibleSection.id;
+        this.lastActiveChange = now;
+      });
     }
   }
 }
