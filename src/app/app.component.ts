@@ -64,27 +64,27 @@ export class AppComponent implements OnInit {
       template: null
     },
     {
-      id: 'Preventieve verrichtingen',
+      id: 'ETZ Fit',
       number: '7.',
+      name: 'ETZ Fit / Duurzame inzetbaarheid',
+      template: null
+    },
+    {
+      id: 'Preventieve verrichtingen',
+      number: '8.',
       name: 'Preventieve verrichtingen',
       template: null
     },
     {
       id: 'Bedrijfsmaatschappelijk werk',
-      number: '8.',
+      number: '9.',
       name: 'Bedrijfsmaatschappelijk werk',
       template: null
     },
     {
       id: 'Commissies en Veiligheid',
-      number: '9.',
-      name: 'Commissies en Veiligheid',
-      template: null
-    },
-    {
-      id: 'CAO',
       number: '10.',
-      name: 'CAO',
+      name: 'Commissies en Veiligheid',
       template: null
     }
   ];
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
   }
 
   private checkIfMobile() {
-    this.isMobile = window.innerWidth < 768; // 768px is typical mobile breakpoint
+    this.isMobile = window.innerWidth < 1400; // Increased from 768px to 1400px
     // Auto-hide sidebar on mobile
     if (this.isMobile) {
       this.isSidebarOpen = false;
