@@ -133,20 +133,27 @@ export class Report2024Component implements OnInit {
 
       // Calculate the current scroll position + distance to element, adjusted for container
       // This handles nested scrolling correctly
-      const targetScrollTop = scrollContainer.scrollTop + (elementRect.top - containerRect.top);
+      const startPosition = scrollContainer.scrollTop;
+      const offset = elementRect.top - containerRect.top;
+      const targetPosition = startPosition + offset;
 
-      scrollContainer.scrollTo({
-        top: targetScrollTop,
-        behavior: 'smooth'
-      });
+      const startTime = performance.now();
+      const duration = 800; // ms
 
-      // Update tracking variables
-      const checkScrollStopped = () => {
-        const currentScrollTop = scrollContainer.scrollTop;
-        const distance = Math.abs(currentScrollTop - targetScrollTop);
+      // Ease out cubic function for smooth deceleration
+      const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
-        // Consider scroll finished if we're very close to target
-        if (distance < 5) {
+      const animateScroll = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = easeOutCubic(progress);
+
+        scrollContainer.scrollTop = startPosition + (offset * ease);
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll);
+        } else {
+          // Animation complete
           this.ngZone.run(() => {
             // Add a small delay before re-enabling section detection
             setTimeout(() => {
@@ -154,20 +161,10 @@ export class Report2024Component implements OnInit {
               this.detectActiveSection(); // Force an immediate check
             }, 100);
           });
-          return;
         }
-
-        // Timeout fallback in case smooth scroll gets stuck or interrupted by user
-        if (Date.now() - this.lastActiveChange > 2000) {
-          this.manuallySelectedSection = null;
-          return;
-        }
-
-        requestAnimationFrame(checkScrollStopped);
       };
 
-      // Start checking for scroll completion
-      requestAnimationFrame(checkScrollStopped);
+      requestAnimationFrame(animateScroll);
     }
 
     // Close sidebar on mobile after selection
