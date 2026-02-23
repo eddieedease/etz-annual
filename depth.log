@@ -1,0 +1,11 @@
+Line 47  : depth 5 -> <div *ngSwitchCase="'Algemeen'">
+Line 76  : depth 5 -> <div *ngSwitchCase="'Inzicht medewerkers'">
+Line 671 : depth 5 -> <div *ngSwitchCase="'Verlof en generatieafspraken'">
+Line 802 : depth 5 -> <div *ngSwitchCase="'Personeelsbeleid'">
+Line 1123: depth 5 -> <div *ngSwitchCase="'Verzuim'">
+Line 1632: depth 5 -> <div *ngSwitchCase="'Arbeid en gezondheid'">
+Line 3595: depth 6 -> <div *ngSwitchCase="'ETZ Fit'">
+Line 3796: depth 6 -> <div *ngSwitchCase="'Preventieve verrichtingen'">
+Line 4059: depth 6 -> <div *ngSwitchCase="'Bedrijfsmaatschappelijk werk'">
+Line 4329: depth 6 -> <div *ngSwitchCase="'Commissies en Veiligheid'">
+Line 4419: depth 5 -> <!-- <div *ngSwitchCase="'CAO'">
