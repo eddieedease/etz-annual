@@ -26,14 +26,15 @@
     </div>
   </div>
 
+  <!-- Toggle Sidebar Button -->
+  <button (click)="toggleSidebar()"
+    class="fixed top-4 left-4 z-30 p-2 bg-white text-etz-blue rounded-full shadow-lg hover:bg-gray-100 focus:outline-none transition-transform hover:scale-105">
+    <span class="font-bold mr-2 text-sm">INHOUD</span>
+    <i class="text-xl not-italic font-bold"> {{ isSidebarOpen ? "←" : "→" }}</i>
+  </button>
+
   <div #mainContent="" class="flex-1 overflow-auto transition-all duration-300 animate-fade-in-up"
     [ngClass]="{ 'ml-64': isSidebarOpen, 'ml-0': !isSidebarOpen }" (scroll)="onScroll()">
-    <!-- Toggle Sidebar Button -->
-    <button style="z-index: 99" (click)="toggleSidebar()"
-      class="fixed top-4 left-4 z-30 p-2 bg-white text-etz-blue rounded-full shadow-lg hover:bg-gray-100 focus:outline-none transition-transform hover:scale-105">
-      <span class="font-bold mr-2 text-sm">INHOUD</span>
-      <i class="text-xl not-italic font-bold"> {{ isSidebarOpen ? "←" : "→" }}</i>
-    </button>
 
     <div class="max-w-4xl mx-auto p-8">
       <section *ngFor="let section of sections" [id]="section.id" class="min-h-screen py-16">
@@ -727,17 +728,13 @@
                 3.2 Regeling generatiebeleid
               </h3>
               <p class="text-gray-700 mb-4">
-                Het generatiebeleid is 2022 geïntroduceerd en hiermee geeft
-                het ETZ invulling aan de afspraak Generatiebeleid zoals
-                overeengekomen in de Cao Ziekenhuizen. Daarbij sluit de
-                regeling aan bij onze visie op duurzame inzetbaarheid en is
-                daarmee een aanvulling op ons instrumentarium (zoals opgenomen
-                in Buitengewoon gezond, oog voor elkaar), het ETZ Fit
-                programma en de regeling is tevens een invulling van artikel
-                12.5. van de Cao Ziekenhuizen. Deze regeling maakt het
-                mogelijk dat oudere medewerkers minder uren kunnen werken, wat
-                mogelijk een positief effect heeft op het op een gezonde
-                manier tot aan het pensioen blijven werken.
+                Het generatiebeleid is in 2022 geïntroduceerd en hiermee geeft het ETZ invulling aan de afspraak
+                Generatiebeleid zoals overeengekomen in de Cao Ziekenhuizen. Daarbij sluit de regeling aan bij onze
+                visie op duurzame inzetbaarheid en is daarmee een aanvulling op ons instrumentarium (zoals opgenomen in
+                Buitengewoon gezond, oog voor elkaar), het ETZ Fit programma en de regeling is tevens een invulling van
+                hoofdstuk 13 van de Cao Ziekenhuizen. Deze regeling maakt het mogelijk dat oudere medewerkers minder
+                uren kunnen werken, wat mogelijk een positief effect heeft op het op een gezonde manier tot aan het
+                pensioen blijven werken.
               </p>
 
               <p class="text-gray-700 mb-4">
@@ -761,9 +758,15 @@
                       </td>
                     </tr>
                     <tr>
-                      <td class="py-2 px-4 border-b">Deelnemer 2024</td>
+                      <td class="py-2 px-4 border-b">Deelnemers 2024</td>
                       <td class="py-2 px-4 text-center border-b font-medium">
                         33
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 px-4 border-b">Deelnemers 2025</td>
+                      <td class="py-2 px-4 text-center border-b font-medium">
+                        74, waarvan 36 instromers in 2025
                       </td>
                     </tr>
                   </tbody>
@@ -776,18 +779,27 @@
                   Groei deelnemers generatiebeleid
                 </h4>
                 <div class="h-64 w-full bg-white rounded-lg shadow p-4 flex items-end justify-around">
-                  <div class="flex flex-col items-center">
-                    <div class="w-16 bg-blue-300 rounded-t" style="height: 10px"></div>
-                    <p class="mt-2 text-sm">2022: 2</p>
+
+                  <div class="flex flex-col items-center h-full justify-end">
+                    <div class="w-16 bg-blue-300 rounded-t" style="height: 3%"></div>
+                    <p class="mt-2 text-sm whitespace-nowrap">2022: 2</p>
                   </div>
-                  <div class="flex flex-col items-center">
-                    <div class="w-16 bg-etz-blue rounded-t" style="height: 135px"></div>
-                    <p class="mt-2 text-sm">2023: 27</p>
+
+                  <div class="flex flex-col items-center h-full justify-end">
+                    <div class="w-16 bg-etz-blue rounded-t" style="height: 36%"></div>
+                    <p class="mt-2 text-sm whitespace-nowrap">2023: 27</p>
                   </div>
-                  <div class="flex flex-col items-center">
-                    <div class="w-16 bg-blue-700 rounded-t" style="height: 165px"></div>
-                    <p class="mt-2 text-sm">2024: 33</p>
+
+                  <div class="flex flex-col items-center h-full justify-end">
+                    <div class="w-16 bg-blue-700 rounded-t" style="height: 45%"></div>
+                    <p class="mt-2 text-sm whitespace-nowrap">2024: 33</p>
                   </div>
+
+                  <div class="flex flex-col items-center h-full justify-end">
+                    <div class="w-16 bg-green-700 rounded-t" style="height: 100%"></div>
+                    <p class="mt-2 text-sm whitespace-nowrap font-bold">2025: 74</p>
+                  </div>
+
                 </div>
               </div>
             </div>

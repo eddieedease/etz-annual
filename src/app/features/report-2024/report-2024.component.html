@@ -27,14 +27,15 @@
     </div>
   </div>
 
+  <!-- Toggle Sidebar Button -->
+  <button (click)="toggleSidebar()"
+    class="fixed top-4 left-4 z-30 p-2 bg-white text-etz-blue rounded-full shadow-lg hover:bg-gray-100 focus:outline-none transition-transform hover:scale-105">
+    <span class="font-bold mr-2 text-sm">INHOUD</span>
+    <i class="text-xl not-italic font-bold"> {{ isSidebarOpen ? "←" : "→" }}</i>
+  </button>
+
   <div #mainContent class="flex-1 overflow-auto transition-all duration-300 animate-fade-in-up"
     [ngClass]="{ 'ml-64': isSidebarOpen, 'ml-0': !isSidebarOpen }" (scroll)="onScroll()">
-    <!-- Toggle Sidebar Button -->
-    <button style="z-index: 99" (click)="toggleSidebar()"
-      class="fixed top-4 left-4 z-30 p-2 bg-white text-etz-blue rounded-full shadow-lg hover:bg-gray-100 focus:outline-none transition-transform hover:scale-105">
-      <span class="font-bold mr-2 text-sm">INHOUD</span>
-      <i class="text-xl not-italic font-bold"> {{ isSidebarOpen ? "←" : "→" }}</i>
-    </button>
 
     <!-- Content Area -->
     <div class="max-w-4xl mx-auto p-8">

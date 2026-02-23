@@ -123,19 +123,28 @@ export class Report2024Component implements OnInit {
     // Update the active section and track it
     this.activeSection = sectionId;
     this.manuallySelectedSection = sectionId;
-    this.lastActiveChange = Date.now(); // Reset the timestamp for manual selection
+    this.lastActiveChange = Date.now();
 
+    // On mobile: close the sidebar first, then wait for the CSS transition
+    // (300ms) to finish before calculating positions — otherwise the layout
+    // shift from the sidebar closing causes the scroll target to be wrong.
+    if (this.isMobile && this.isSidebarOpen) {
+      this.isSidebarOpen = false;
+      setTimeout(() => this.performScroll(sectionId), 320);
+    } else {
+      this.performScroll(sectionId);
+    }
+  }
+
+  private performScroll(sectionId: string) {
     const element = document.getElementById(sectionId);
     if (element && this.mainContent) {
       const scrollContainer = this.mainContent.nativeElement;
       const containerRect = scrollContainer.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
 
-      // Calculate the current scroll position + distance to element, adjusted for container
-      // This handles nested scrolling correctly
       const startPosition = scrollContainer.scrollTop;
       const offset = elementRect.top - containerRect.top;
-      const targetPosition = startPosition + offset;
 
       const startTime = performance.now();
       const duration = 800; // ms
@@ -153,23 +162,16 @@ export class Report2024Component implements OnInit {
         if (progress < 1) {
           requestAnimationFrame(animateScroll);
         } else {
-          // Animation complete
           this.ngZone.run(() => {
-            // Add a small delay before re-enabling section detection
             setTimeout(() => {
               this.manuallySelectedSection = null;
-              this.detectActiveSection(); // Force an immediate check
+              this.detectActiveSection();
             }, 100);
           });
         }
       };
 
       requestAnimationFrame(animateScroll);
-    }
-
-    // Close sidebar on mobile after selection
-    if (this.isMobile) {
-      this.isSidebarOpen = false;
     }
   }
 
